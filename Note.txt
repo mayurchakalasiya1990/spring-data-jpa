@@ -1,0 +1,4 @@
+- Within txn if we are modify/update entity even after persist/save entity, JPA will take care of change in entity and sync database. refer: playWithEntityManager()
+
+- @UpdateTimestamp ,@CreationTimestamp : both are hibernate annotation. it is not part of JPA.
+- @NamedQuery, @NamedQueries - assign query to variable
