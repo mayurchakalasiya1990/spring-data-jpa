@@ -1,0 +1,26 @@
+
+insert into passport values(10001,"F1233212");
+insert into passport values(10002,"A1233212");
+insert into passport values(10003,"B1233212");
+insert into passport values(10004,"C1233212");
+insert into passport values(10005,"E1233212");
+
+insert into student values(10001,18,"test1@email.com","Mayur",10001);
+insert into student values(10002,22,"test2@email.com","Ramesh",10002);
+insert into student values(10003,21,"test3@email.com","James",10003);
+insert into student values(10004,25,"test4@email.com","Steve",10004);
+insert into student values(10005,27,"test5@email.com","Robert",10005);
+
+
+insert into course values(10001,sysdate(),sysdate(),"AngularJS course");
+insert into course values(10002,sysdate(),sysdate(),"REST Webservice course");
+insert into course values(10003,sysdate(),sysdate(),"SOAP Webservice course");
+insert into course values(10004,sysdate(),sysdate(),"Microservices course");
+insert into course values(10005,sysdate(),sysdate(),"Spring JPA");
+
+insert into review(ID,description,rating,course_id) values(10001,"Best",5,10005);
+insert into review(ID,description,rating,course_id) values(10002,"Average",3,10005);
+insert into review(ID,description,rating,course_id) values(10003,"Good",4,10005);
+insert into review(ID,description,rating,course_id) values(10004,"need to improve audio",2,10004);
+insert into review(ID,description,rating,course_id) values(10005,"Irrelevant information",1,10003);
+

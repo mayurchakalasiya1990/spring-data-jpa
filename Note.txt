@@ -1,4 +1,29 @@
-- Within txn if we are modify/update entity even after persist/save entity, JPA will take care of change in entity and sync database. refer: playWithEntityManager()
+- Within txn if we are modify/update entity even after persist/save entity, JPA will take care of change in entity and sync database.
+  refer: playWithEntityManager()
 
 - @UpdateTimestamp ,@CreationTimestamp : both are hibernate annotation. it is not part of JPA.
 - @NamedQuery, @NamedQueries - assign query to variable
+- @Transactional : it will create transaction for given method or class. it will create persistence context for method or class.
+
+
+1) @OneToMany : Lazy loading
+    Example:
+        - One course have multiple reviews
+        - One review have single course
+
+2) @OneToOne : eager loading
+    Example:
+        - Student have single passport.
+        - Passport have single Student.
+
+3) @ManyToMany : Lazy loading
+     Example:
+        - Student can have multiple courses
+        - Course can have multiple Student
+     - User join table
+
+tip: @_ToOne : eager loading and @_ToMany: Lazy loading
+
+
+JPQL : Java persistence Query Language
+

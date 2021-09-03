@@ -1,6 +1,8 @@
 package com.springdatajpa.demo.Repository;
 
 import com.springdatajpa.demo.entity.Course;
+import com.springdatajpa.demo.entity.Review;
+import com.springdatajpa.demo.entity.Student;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -10,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest // load Spring-boot Context
@@ -20,6 +25,8 @@ public class CourseRepositoryTest {
     @Autowired
     CourseRepository courseRepository;
 
+    @Autowired
+    EntityManager entityManager;
     @Test
     public void contextLoads(){
         Course course=courseRepository.findById(10002L);
@@ -40,6 +47,17 @@ public class CourseRepositoryTest {
         Assertions.assertEquals(course.getName(),"Microservice course");
     }
 
+    @Test
+    @Transactional
+    public void retrieveReviewsForCourse(){
+       Course course=courseRepository.findById(10002L);
+       logger.info("Reviews:"+course.getReviews().size());
+    }
 
-
+    @Test
+    @Transactional
+    public void retrieveCourseForReview(){
+        Review review=entityManager.find(Review.class,10002L);
+        logger.info("Reviews:"+review.getCourse());
+    }
 }

@@ -9,6 +9,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor // it is required by JPA to create Entity class
@@ -35,4 +37,10 @@ public class Course {
     private LocalDateTime lastUpdatedDate;
     @CreationTimestamp
     private LocalDateTime createdDate;
+
+    @OneToMany(mappedBy = "course",fetch = FetchType.LAZY)
+    List<Review> reviews=new ArrayList<>();
+
+    @ManyToMany(mappedBy = "courses")
+    List<Student> students=new ArrayList<>();
 }

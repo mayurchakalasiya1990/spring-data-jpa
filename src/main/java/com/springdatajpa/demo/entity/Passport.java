@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @AllArgsConstructor
@@ -23,5 +20,14 @@ public class Passport {
 
     @Column(nullable = false)
     private String passportNo;
+
+    /*
+        mappedBy = "passport"  indicates:
+        In one_To_one relation of Student-Passport
+        Student - parent table (Student table have passport_id as column in table)
+        Passport - child table (Passport table don't have student_id as column in table)
+     */
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "passport")
+    private Student student;
 
 }

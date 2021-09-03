@@ -1,12 +1,16 @@
 package com.springdatajpa.demo.Repository;
 
 import com.springdatajpa.demo.entity.Course;
+import com.springdatajpa.demo.entity.Review;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -14,6 +18,8 @@ public class CourseRepository {
 
     @Autowired
     EntityManager entityManager;
+
+    Logger logger= LoggerFactory.getLogger(this.getClass());
 
     public Course findById(Long id){
             return entityManager.find(Course.class,id);
@@ -54,6 +60,19 @@ public class CourseRepository {
         System.out.println(course);
         course2.setName("SOAP WebService - After refresh");
 
+    }
+
+    public void addCourseReview(Long courseId, List<Review> reviews){
+        //get the course 10003
+        Course course2=findById(courseId);
+        logger.info("Review for Course :"+course2.getReviews());
+        //set reviews in course Entity
+        course2.setReviews(reviews);
+        //set course in review Entity and persist
+        for (Review review : reviews){
+            review.setCourse(course2);
+            entityManager.persist(review);
+        }
     }
 
 }

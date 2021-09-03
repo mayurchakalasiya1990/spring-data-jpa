@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,4 +24,17 @@ public class Review {
     @Column(nullable = false)
     private int rating;
 
+    @ManyToOne
+    private Course course;
+
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", rating=" + rating +
+                ", course_id=" + course.getId() +
+                '}';
+    }
 }

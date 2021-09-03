@@ -1,67 +1,47 @@
 package com.springdatajpa.demo.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
 @Entity(name = "student")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(
-        name = "student",
-        uniqueConstraints ={
-                @UniqueConstraint(name = "student_email_unique",columnNames = "email")
-        }
-
-)
+@Builder
 public class Student {
 
     @Id
-    @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
-    )
-    @Column(
-            name = "id",
-            updatable = false
-    )
+    @GeneratedValue
     private Long id;
-    @Column(
-            name = "first_name",
-            nullable = false,
-            columnDefinition = "TEXT"
-
-    )
-    private String firstName;
-    @Column(
-            name = "last_name",
-            nullable = false,
-            columnDefinition = "TEXT"
-
-    )
-    private String lastName;
-    @Column(
-            name = "email",
-            nullable = false,
-            columnDefinition = "TEXT"
-
-    )
+    private String name;
     private String email;
-    @Column(
-            name = "age",
-            nullable = false
-    )
     private Integer age;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
+
+    @ManyToMany
+    @JoinTable(name = "student_course",
+    joinColumns = @JoinColumn(name="student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    List<Course> courses= new ArrayList<>();
+
+    //de-lambok toString() method
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", passport No:=" + passport.getPassportNo() +
+                '}';
+    }
 }
