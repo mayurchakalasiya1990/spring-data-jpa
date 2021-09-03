@@ -2,18 +2,25 @@ package com.springdatajpa.demo2;
 
 import com.springdatajpa.demo2.entity.Course;
 import com.springdatajpa.demo2.entity.Teacher;
+import com.springdatajpa.demo2.repository.StudentRepository;
 import com.springdatajpa.demo2.repository.TeacherRepository;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 @SpringBootTest
+@RunWith(SpringRunner.class)
 public class TeacherRepoTest {
 
     @Autowired
-    TeacherRepository teacherRepository;
+    private TeacherRepository teacherRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Test
     public void saveTeacher(){
@@ -30,9 +37,10 @@ public class TeacherRepoTest {
         Teacher teacher=Teacher.builder()
                 .firstName("Swami Vivekanda")
                 .lastName("Guruji")
-                .courses(List.of(course1,course2))
+                //.courses(List.of(course1,course2))
                 .build();
-
+        System.out.println(studentRepository);
+        System.out.println(teacherRepository);
         teacherRepository.save(teacher);
     }
 }
